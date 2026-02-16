@@ -5,7 +5,7 @@ on:
     branches: [main]
 
 env:
-  IMAGE: ghcr.io/${{ github.repository_owner }}/k8s-todo
+  IMAGE: ghcr.io/${{ github.repository }}
 
 jobs:
   build:

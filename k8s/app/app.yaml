@@ -26,7 +26,7 @@ spec:
         runAsNonRoot: true
       containers:
         - name: todo-app
-          image: ghcr.io/alfredtm/k8s-todo:latest
+          image: ghcr.io/alfredtm/k8s-todo:latest  # update to match your ghcr.io path
           ports:
             - containerPort: 8080
           envFrom:
