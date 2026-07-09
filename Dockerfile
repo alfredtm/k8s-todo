@@ -7,7 +7,6 @@ RUN CGO_ENABLED=0 go build -o /app .
 
 FROM gcr.io/distroless/static-debian12
 COPY --from=build /app /app
-COPY --from=build /src/templates /templates
 USER 65534
 EXPOSE 8080
 ENTRYPOINT ["/app"]

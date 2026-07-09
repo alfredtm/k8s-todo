@@ -1,12 +1,15 @@
 package main
 
 import (
+	"embed"
 	"html/template"
 	"log"
 	"net/http"
 	"os"
-	"path/filepath"
 )
+
+//go:embed templates/index.html
+var templatesFS embed.FS
 
 var tmpl *template.Template
 
@@ -16,17 +19,8 @@ type pageData struct {
 }
 
 func main() {
-	// Parse templates
-	exePath, _ := os.Executable()
-	exeDir := filepath.Dir(exePath)
-
-	// Try templates relative to executable first, then working directory
-	tmplPath := filepath.Join(exeDir, "templates", "index.html")
-	if _, err := os.Stat(tmplPath); err != nil {
-		tmplPath = filepath.Join("templates", "index.html")
-	}
 	var err error
-	tmpl, err = template.ParseFiles(tmplPath)
+	tmpl, err = template.ParseFS(templatesFS, "templates/index.html")
 	if err != nil {
 		log.Fatalf("parse template: %v", err)
 	}
